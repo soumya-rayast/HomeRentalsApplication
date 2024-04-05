@@ -1,0 +1,90 @@
+@import "./variables.scss";
+@import "./breakpoints.scss";
+
+.register {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  
+    &_content {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 40%;
+      padding: 40px;
+      background-color: rgba(12, 48, 126, 0.8);
+      border-radius: 20px;
+  
+      @include lg {
+        width: 60%;
+      }
+  
+      @include mm {
+        width: 80%;
+      }
+  
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        width: 100%; 
+        input {
+          width: 100%;
+          padding: 7px 15px;
+          background-color: transparent;
+          border: none;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+          outline: none;
+          text-align: center;
+          color: white;
+  
+          &::placeholder {
+            color: white;
+          }
+        }
+  
+        label {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 9px;
+          cursor: pointer;
+          color: white;
+          font-size: 14px;
+  
+          FontAwesomeIcon {
+            width: 25px;
+          }
+        }
+  
+        button {
+          margin-top: 15px;
+          @include buttonStyle; /* Assuming buttonStyle mixin is defined elsewhere */
+  
+          width: 50%;
+  
+          &:hover {
+            box-shadow: 0 0 10px 3px rgba(255, 255, 255);
+          }
+        }
+      }
+  
+      a {
+        text-decoration: none;
+        color: white;
+        font-size: 13px;
+        margin-top: 10px;
+        text-align: center;
+  
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  

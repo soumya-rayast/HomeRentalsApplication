@@ -1,0 +1,98 @@
+:export {
+  pinkred: #F8395A;
+  blue: #24355A;
+  lightgrey: #F7F8F8;
+  grey: #bdb9b9;
+  darkgrey: #969393;
+}
+
+.register {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.register_content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 40%;
+  padding: 40px;
+  background-color: rgba(12, 48, 126, 0.8);
+  border-radius: 20px;
+}
+@media (max-width: 1000px) {
+  .register_content {
+    width: 60%;
+  }
+}
+@media (max-width: 580px) {
+  .register_content {
+    width: 80%;
+  }
+}
+.register_content form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+.register_content form input {
+  width: 100%;
+  padding: 7px 15px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  outline: none;
+  text-align: center;
+  color: white;
+}
+.register_content form input::-moz-placeholder {
+  color: white;
+}
+.register_content form input::placeholder {
+  color: white;
+}
+.register_content form label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
+  cursor: pointer;
+  color: white;
+  font-size: 14px;
+}
+.register_content form label FontAwesomeIcon {
+  width: 25px;
+}
+.register_content form button {
+  margin-top: 15px;
+  padding: 10px 15px;
+  background-color: #F8395A;
+  border: none;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+  color: white;
+  border-radius: 10px;
+  /* Assuming buttonStyle mixin is defined elsewhere */
+  width: 50%;
+}
+.register_content form button:hover {
+  box-shadow: 0 0 10px 3px rgb(255, 255, 255);
+}
+.register_content a {
+  text-decoration: none;
+  color: white;
+  font-size: 13px;
+  margin-top: 10px;
+  text-align: center;
+}
+.register_content a:hover {
+  text-decoration: underline;
+}/*# sourceMappingURL=Register.css.map */
