@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import '../Styles/Register.scss'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const RegisterPage = () => {
     const [formData, setformData] = useState({
@@ -12,12 +12,12 @@ const RegisterPage = () => {
         profileImage: null
     })
 
-    const handleChange =(e) =>{
-        const {name,value,files} = e.target 
+    const handleChange = (e) => {
+        const { name, value, files } = e.target
         setformData({
-            ...formData,
-            [name]:value,
-            [name]:name === "profileImage" ? files[0] :value
+            ...formData, //kept previous data
+            [name]: value,
+            [name]: name === "profileImage" ? files[0] : value
         })
 
     }
@@ -30,32 +30,40 @@ const RegisterPage = () => {
                         placeholder='First Name'
                         name='firstname'
                         value={formData.firstname}
+                        onChange={handleChange}
                         required />
                     <input type="text"
                         placeholder='Last Name'
-                        ame='lastname'
+                        name='lastname'
                         value={formData.lastname}
+                        onChange={handleChange}
                         required />
                     <input type="email"
                         placeholder='Email'
                         name='email'
                         value={formData.email}
+                        onChange={handleChange}
                         required />
                     <input type="password"
                         placeholder='Password'
                         name='password'
                         value={formData.password}
+                        onChange={handleChange}
                         required />
                     <input type="password"
                         placeholder='Confirm Password'
                         name='confirmPassword'
                         value={formData.confirmPassword}
+                        onChange={handleChange}
                         required />
-                    <input id='image' type="file" name='profileimage' accept='image/*' required style={{ display: 'none' }} />
+                    <input id='image' type="file" name='profileimage' onChange={handleChange} accept='image/*' required style={{ display: 'none' }} />
                     <label htmlFor='image' >
-                        <FontAwesomeIcon icon="fa-light fa-upload" />
+                        {/* <FontAwesomeIcon icon="fa-light fa-upload" /> */}
                         <p> + Upload Your Photo </p>
                     </label>
+                    {formData.profileImage && (
+                        <img src={URL.createObjectURL(formData.profileImage)} alt='progile photo' style={{maxWidth: "80px"}} />
+                    )}
                     <button type='submit'>Register</button>
                 </form>
                 <a href="/login">Already Have an account? Log In here</a>
