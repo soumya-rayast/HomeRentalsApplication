@@ -9,7 +9,8 @@ const User = require("../models/User")
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null,"public/uploads/")//store the uploaded files in uploads folder
-    },filename: function(req,file,cb){
+    },
+    filename: function(req,file,cb){
         cb(null,file.originalname) //use the original file name
     }
 })
@@ -21,19 +22,19 @@ router.post("/register", upload.single('profileImage'), async (req, res) => {
     try {
         const { firstName, lastName, email, password } = req.body
 
-        const profileImage = req.body
+        const profileImage = req.file;
         if(!profileImage){
-            return res.status(400).send("mNo file uploaded")
+            return res.status(400).send("No file uploaded")
         }
         const profileImagePath =profileImage.path  //path to the uploaded profile photo
 
         const existingUser = await user.findOne({email}) //check if user exists
         if(existingUser){
-            return res.status(409).json({message:"user already exists"})
+            return res.status(409).json({message:"User already exists"})
         }
 
-        const salt = await bcrypt.genSalt() //for hass the password
-        const hassPassword = await bcrypt.hash(password,salt)
+        const salt = await bcrypt.genSalt()  //for hass the password
+        const hashedPassword = await bcrypt.hash(password,salt)
 
         // creating new user 
         const newUser = new User ({
@@ -52,3 +53,4 @@ router.post("/register", upload.single('profileImage'), async (req, res) => {
         res.status(500).json({message :"registration Failed!",error: err.message})
     }
 })
+module.exports = router;

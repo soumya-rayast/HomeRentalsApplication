@@ -1,24 +1,24 @@
 const mongoose = require("mongoose");
 const UserScheme = new mongoose.Schema({
     firstName: {
-        type: string,
+        type: String,
         required: true,
     },
     lastName: {
-        type: string,
+        type: String,
         required: true,
     },
     Email: {
-        type: string,
+        type: String,
         required: true,
         unique: true,
     },
     password: {
-        type: string,
+        type: String,
         required: true,
     },
     profileImagePath: {
-        type: string,
+        type: String,
         default: "",
     },
     tripList: {
