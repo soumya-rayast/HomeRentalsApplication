@@ -32,26 +32,49 @@ const RegisterPage = () => {
         setPasswordMatch(formData.password === formData.confirmPassword || formData.confirmPassword === "")
     })
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault()
+    //     try {
+    //         const register_form = new FormData();
+    //         for (var key in formData) {
+    //             register_form.append(key, formData[key])
+    //         }
+    //         const response = await fetch("http://localhost:3001/auth/register", {
+    //             method: "POST",
+    //             body: register_form
+    //         })
+
+    //         if (response.ok) {
+    //             navigate("/login")
+    //         }
+    //     } catch (err) {
+    //         console.log("Registration Failed!")
+    //     }
+    // }
+
+    const handleSubmit = async () => {
         try {
             const register_form = new FormData();
-            for (var key in formData) {
-                register_form.append(key, formData[key])
+            for (const key in formData) {
+                register_form.append(key, formData[key]);
             }
+    
             const response = await fetch("http://localhost:3001/auth/register", {
                 method: "POST",
                 body: register_form
-            })
-
-            if (response.ok) {
-                navigate("/login")
+            });
+    
+            if (!response.ok) {
+                throw new Error(`Failed to register. Status: ${response.status}`);
             }
-        } catch (err) {
-            console.log("Registration Failed!")
+    
+            // Registration successful, navigate to login page
+            navigate("/login");
+        } catch (error) {
+            console.error("Error registering user:", error.message);
         }
-    }
-
+    };
+    
 
     return (
         <div className="register">
@@ -119,7 +142,7 @@ const RegisterPage = () => {
                     </button>
                 </form>
                 <a href="/login">Already Have an account? Log In here</a>
-            </div>m
+            </div>
         </div>
     )
 }
