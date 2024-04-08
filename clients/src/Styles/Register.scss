@@ -8,6 +8,8 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background: url(../../public/assests/register.jpg);
+    background-size: cover;
   
     &_content {
       display: flex;
@@ -15,7 +17,7 @@
       gap: 15px;
       width: 40%;
       padding: 40px;
-      background-color: rgba(12, 48, 126, 0.8);
+      background-color: rgba(0, 0, 0, 0.8);
       border-radius: 20px;
   
       @include lg {
@@ -64,7 +66,7 @@
   
         button {
           margin-top: 15px;
-          @include buttonStyle; /* Assuming buttonStyle mixin is defined elsewhere */
+          @include buttonStyle; 
   
           width: 50%;
   

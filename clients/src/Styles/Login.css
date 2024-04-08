@@ -12,6 +12,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background: url(../../public/assests/login.jpg);
+  background-size: cover;
   flex-direction: column;
 }
 .login_content {
@@ -48,4 +50,53 @@
   outline: none;
   text-align: center;
   color: white;
+}
+.login_content_form input input:not(:-moz-placeholder-shown):focus {
+  background: transparent;
+}
+.login_content_form input input:not(:placeholder-shown):focus {
+  background: transparent;
+}
+.login_content_form input::-moz-placeholder {
+  color: white;
+}
+.login_content_form input::placeholder {
+  color: white;
+}
+.login_content_form button {
+  margin-top: 15px;
+  padding: 10px 15px;
+  background-color: #F8395A;
+  border: none;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+  color: white;
+  border-radius: 10px;
+  width: 50%;
+}
+.login_content_form button:hover {
+  box-shadow: 0 0 10px 3px rgb(255, 255, 255);
+}
+.login_content_google {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.login_content a {
+  text-decoration: none;
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+}
+.login_content a:hover {
+  text-decoration: underline;
+}
+.login_content p {
+  color: white;
+  font-size: 13px;
+  text-align: center;
 }/*# sourceMappingURL=Login.css.map */

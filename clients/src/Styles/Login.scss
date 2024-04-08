@@ -1,11 +1,14 @@
-@import "../Styles/variables.scss";
-@import "../Styles/breakpoints.scss";
+@import "./variables.scss";
+@import "./breakpoints.scss";
+
 
 .login{
     width: 100vw;
     height: 100vh;
     display: flex;justify-content: center;
     align-items: center;
+    background: url(../../public/assests/login.jpg);
+    background-size: cover;
     flex-direction: column;
 
     &_content{
@@ -38,7 +41,46 @@
                 outline: none;
                 text-align: center;
                 color: white;
+
+                input:not(:placeholder-shown):focus{
+                    background: transparent;
+                }
+                &::placeholder{
+                    color: white;
+                }
             }
+            button{
+                margin-top: 15px;
+
+                @include buttonStyle;
+                width: 50%;
+                
+                &:hover{
+                    box-shadow: 0 0 10px 3px rgba(255,255,255);
+                }
+            }
+        }
+
+        &_google{
+            width: 100%;
+            display: flex;justify-content: center;
+            margin-top: 20px;
+        }
+        a{
+            text-decoration: none;
+            color: white;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+        p{
+            color: white;
+            font-size: 13px;
+            text-align: center;
         }
     }
 }
