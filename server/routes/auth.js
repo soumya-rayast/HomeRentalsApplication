@@ -46,7 +46,7 @@ router.post("/register", upload.single('profileImage'), async (req, res) => {
         });
         await newUser.save()
 
-        // send a sucessfull message 
+        // send a success full message 
         res.status(200).json({ message: "User registered successfully", user: newUser })
     } catch (err) {
         console.log(err)
@@ -61,18 +61,19 @@ router.post("/login", async (req, res) => {
         const [email, password] = req.body //take the information from login page
 
         // checking existing user or not 
-        const User = await user.findOne({ email });
-        if (User) {
+        const user = await user.findOne({ email });
+        if (!user) {
             return res.status(409).json({ message: "User Dose not Exists" })
         }
 
         // generate jwt token 
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
         delete user.password;
+
         res.status(200).json({ token, user })
     } catch (err) {
         console.log(err);
-        res.status(500) / json({ error: err.message })
+        res.status(500).json({ error: err.message })
     }
 })
 module.exports = router;

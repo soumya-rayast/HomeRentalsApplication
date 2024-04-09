@@ -16,7 +16,7 @@ import state from "./State"
 const persistConfig = {
     key: "root",
     version: 1,
-    storage
+    storage,
 };
 const persistedReducer = persistReducer(persistConfig, state);
 
@@ -30,4 +30,4 @@ export const store = configureStore({
         })
 })
 
-export let persisttor = persistStore(store)
+export let persistor = persistStore(store)
