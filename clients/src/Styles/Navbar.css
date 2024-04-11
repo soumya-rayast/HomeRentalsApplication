@@ -1,0 +1,112 @@
+:export {
+  pinkred: #F8395A;
+  blue: #24355A;
+  lightgrey: #F7F8F8;
+  grey: #bdb9b9;
+  darkgrey: #969393;
+}
+
+.navbar {
+  padding: 10px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+@media (max-width: 480px) {
+  .navbar {
+    padding: 10px 20px;
+  }
+}
+.navbar img {
+  width: 100px;
+  cursor: pointer;
+}
+.navbar_search {
+  border: 1px solid #bdb9b9;
+  border-radius: 30px;
+  height: 50px;
+  padding: 0px 20px;
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+.navbar_search input {
+  border: none;
+  outline: none;
+}
+.navbar_search:hover {
+  box-shadow: 0 3px 10px 2px rgba(0, 0, 0, 0.2);
+}
+@media (max-width: 1000px) {
+  .navbar_search {
+    display: none;
+  }
+}
+.navbar_right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.navbar_right .host {
+  text-decoration: none;
+  color: #24355A;
+  font-weight: 700;
+  cursor: pointer;
+}
+.navbar_right .host:hover {
+  color: #F8395A;
+}
+@media (max-width: 480px) {
+  .navbar_right .host {
+    display: none;
+  }
+}
+.navbar_right_account {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  border: 1px solid #bdb9b9;
+  border-radius: 30px;
+  display: flex;
+  gap: 10px;
+  background-color: white;
+  cursor: pointer;
+}
+.navbar_right_account:hover {
+  box-shadow: 0 3px 10px 2px rgba(0, 0, 0, 0.2);
+}
+.navbar_right_account img {
+  width: 40px;
+  height: 40px;
+}
+.navbar_right_accountmenu {
+  position: absolute;
+  background-color: white;
+  right: 60px;
+  top: 80px;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  padding: 10px 0;
+  border: 1px solid #F7F8F8;
+  border-radius: 20px;
+  box-shadow: 0 3px 10px 2px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+}
+@media (max-width: 480px) {
+  .navbar_right_accountmenu {
+    right: 20px;
+  }
+}
+.navbar_right_accountmenu a {
+  width: 100px;
+  padding: 8px 15px;
+  text-decoration: none;
+  color: #24355A;
+  font-weight: 700;
+}
+.navbar_right_accountmenu a:hover {
+  color: #F8395A;
+}/*# sourceMappingURL=Navbar.css.map */
