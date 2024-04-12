@@ -1,0 +1,76 @@
+:export {
+  pinkred: #F8395A;
+  blue: #24355A;
+  lightgrey: #F7F8F8;
+  grey: #bdb9b9;
+  darkgrey: #969393;
+}
+
+.categories {
+  padding: 50px 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: #F7F8F8;
+}
+@media (max-width: 480px) {
+  .categories {
+    padding: 50px 20px;
+  }
+}
+.categories h1 {
+  color: #24355A;
+  font-size: 40px;
+  font-weight: 800;
+  margin-bottom: 15px;
+}
+.categories p {
+  max-width: 700px;
+  font-size: 20px;
+}
+.categories .categories_list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 50px 0;
+  gap: 20px;
+}
+.categories .categories_list a {
+  text-decoration: none;
+}
+.categories .categories_list .category {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 250px;
+  height: 200px;
+  align-items: center;
+  cursor: pointer;
+}
+.categories .categories_list .category img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.categories .categories_list .category .overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.55);
+  transition: 0.3s ease-in-out;
+}
+.categories .categories_list .category_text {
+  position: relative;
+  color: white;
+}
+.categories .categories_list .category_text_icon {
+  font-size: 45px;
+}
+.categories .categories_list .category_text p {
+  font-weight: 600;
+}
+.categories .categories_list .category:hover .overlay {
+  width: 90%;
+  height: 90%;
+}/*# sourceMappingURL=Categories.css.map */
