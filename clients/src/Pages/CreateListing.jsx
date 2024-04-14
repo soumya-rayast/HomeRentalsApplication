@@ -1,29 +1,37 @@
-import React, { useState } from 'react'
-import "../Styles/CreateListening.scss"
-import Navbar from "../components/Navbar"
-import { categories, types,facilities } from '../data'
-import { RemoveCircleOutline,AddCircleOutline, AspectRatioOutlined } from '@mui/icons-material'
-import variables from "../Styles/variables.scss"
-import {DragDropContext,Draggable,Droppable} from "react-beautiful-dnd"
+import React, { useState } from 'react';
+import "../Styles/CreateListening.scss";
+import Navbar from "../components/Navbar";
+import { categories, types, facilities } from '../data';
+import { RemoveCircleOutline, AddCircleOutline, AspectRatioOutlined } from '@mui/icons-material';
+import variables from "../Styles/variables.scss";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { IoIosImages } from "react-icons/io";
+import { BiTrash } from 'react-icons/bi';
 
 const CreateListing = () => {
+  const [category ,setCategory] = useState("");
+  const [type,setType] = useState("");
+  const [amenities,setAmenities] = useState([]);
+
   // upload ,drag and drop ,remove photos 
-  const [photos,setPhotos] =useState([])
-  const handleuploadPhotos =(e) =>{
-    const newPhotos = e.target.files 
-    setPhotos((prevPhotos)=>[...prevPhotos,...newPhotos])
+  const [photos, setPhotos] = useState([])
+  const handleUploadPhotos = (e) => {
+    const newPhotos = e.target.files
+    setPhotos((prevPhotos) => [...prevPhotos, ...newPhotos])
   }
 
-  const handleDragPhoto= (result)=>{
-    if(!result.destination) return
+  const handleDragPhoto = (result) => {
+    if (!result.destination) return
 
-    const items =Array.from(photos)
-    const [reorderedItem] = item.splice(result.source.index,1)
-    item.slice(result.destination.index,0,reorderedItem)
+    const items = Array.from(photos)
+    const [reorderedItem] = items.splice(result.source.index, 1)
+    items.slice(result.destination.index, 0, reorderedItem)
 
     setPhotos(items)
   }
-// 2:30 :22
+  const handleRemovePhoto = (indexToRemove) => {
+    setPhotos((prevPhotos) => prevPhotos.filter((_, index) => index !== indexToRemove))
+  }
 
   return (
     <div>
@@ -37,7 +45,7 @@ const CreateListing = () => {
             <h3>Which of these categories best describes your place</h3>
             <div className="category-list">
               {categories?.map((item, index) => (
-                <div className='category' key={index}>
+                <div className={`category ${category === item.label ? "selected" : " "}`} key={index} onClick={()=> setCategory(item.label)}>
                   <div className="category_icon">{item.icon}</div>
                   <p>{item.label}</p>
                 </div>
@@ -95,36 +103,36 @@ const CreateListing = () => {
               <div className="basic">
                 <p>Guests</p>
                 <div className="basic_count">
-                  <RemoveCircleOutline style={{fontSize:"25px",cursor:"pointer"}}/>
+                  <RemoveCircleOutline style={{ fontSize: "25px", cursor: "pointer" }} />
                   <p>1</p>
-                  <AddCircleOutline style={{fontSize:"25px",cursor:"pointer"}}/>
+                  <AddCircleOutline style={{ fontSize: "25px", cursor: "pointer" }} />
                 </div>
               </div>
 
               <div className="basic">
                 <p>bedrooms</p>
                 <div className="basic_count">
-                  <RemoveCircleOutline style={{fontSize:"25px",cursor:"pointer"}}/>
+                  <RemoveCircleOutline style={{ fontSize: "25px", cursor: "pointer" }} />
                   <p>1</p>
-                  <AddCircleOutline style={{fontSize:"25px",cursor:"pointer"}}/>
+                  <AddCircleOutline style={{ fontSize: "25px", cursor: "pointer" }} />
                 </div>
               </div>
 
               <div className="basic">
                 <p>Beds</p>
                 <div className="basic_count">
-                  <RemoveCircleOutline style={{fontSize:"25px",cursor:"pointer"}}/>
+                  <RemoveCircleOutline style={{ fontSize: "25px", cursor: "pointer" }} />
                   <p>1</p>
-                  <AddCircleOutline style={{fontSize:"25px",cursor:"pointer"}}/>
+                  <AddCircleOutline style={{ fontSize: "25px", cursor: "pointer" }} />
                 </div>
               </div>
 
               <div className="basic">
                 <p>Bathrooms</p>
                 <div className="basic_count">
-                  <RemoveCircleOutline style={{fontSize:"25px",cursor:"pointer"}}/>
+                  <RemoveCircleOutline style={{ fontSize: "25px", cursor: "pointer" }} />
                   <p>1</p>
-                  <AddCircleOutline style={{fontSize:"25px",cursor:"pointer"}}/>
+                  <AddCircleOutline style={{ fontSize: "25px", cursor: "pointer" }} />
                 </div>
               </div>
 
@@ -136,7 +144,7 @@ const CreateListing = () => {
             <hr />
             <h3>Tell guests what your place has to offer</h3>
             <div className="amenities">
-              {facilities?.map((item,index)=>(
+              {facilities?.map((item, index) => (
                 <div className="facility" key={index}>
                   <div className="facility_icon">
                     {item.icon}
@@ -148,18 +156,89 @@ const CreateListing = () => {
               ))}
             </div>
 
-            <h3>Add come photos of your place</h3>
-            <DragDropContext onDragEnd={}>
+            <h3>Add some photos of your place</h3>
+            <DragDropContext onDragEnd={handleDragPhoto}>
               <Droppable droppableId='photos' direction="horizontal">
-                {(provided)=>(
+                {(provided) => (
                   <div className="photos"
-                  {...provided.droppableProps} 
-                  ref={provided.innerRef}>
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}>
+                    {photos.length < 1 && (
+                      <>
+                        <input type='file' 
+                        style={{ display: "none" }}
+                          id='image'
+                          accept='image/'
+                          onChange={handleUploadPhotos}
+                          multiple
+                        />
+                        <label htmlFor='image' 
+                        className='alone'>
+                          <div className="icon" >
+                            <IoIosImages />
+                          </div>
+                          <p>Upload from your device</p>
+                        </label>
+                      </>
+                    )}
+
+                    {photos.length >= 1 && (
+                      <>
+                        {photos.map((photo, index) => {
+                          return (
+                            <Draggable key={index} 
+                            draggableId={index.toString()}
+                             index={index}>
+                              {(provided) => (
+                                <div className="photo"
+                                  ref={provided.innerRef}
+                                  {...provided.draggableProps}
+                                  {...provided.dragHandleProps}>
+                                  <img src={URL.createObjectURL(photo)} alt="place" />
+                                  <button
+                                   type='button'
+                                    onClick={() => handleRemovePhoto(index)}>
+                                    <BiTrash />
+                                  </button>
+                                </div>
+                              )}
+                            </Draggable>
+                          );
+                        })}
+                        <input type='file' style={{ display: "none" }}
+                          id='image'
+                          accept='image/'
+                          onChange={handleUploadPhotos}
+                          multiple
+                        />
+                        <label htmlFor='image' className='together'>
+                          <div className="icon" >
+                            <IoIosImages />
+                          </div>
+                          <p>Upload from your device</p>
+                        </label>
+                      </>
+                    )}
                   </div>
                 )}
               </Droppable>
             </DragDropContext>
 
+            <h3>What make your place attractive and exciting? </h3>
+            <div className="description">
+              <p>Title</p>
+              <input type="text " placeholder='Title' name='title' required />
+              <p>Description</p>
+              <textarea type="text " placeholder='Description' name='description' required />
+              <p>Highlight</p>
+              <input type="text " placeholder='Highlight' name='highlight' required />
+              <p>Highlight details</p>
+              <textarea type="text " placeholder='Highlight details' name='highlightDESC' required />
+              
+              <p>Now, set your PRICE</p>
+              <span>$</span>
+              <input type="number" placeholder='100' name='price' className='price' required />
+            </div>
           </div>
         </form>
       </div>
