@@ -258,4 +258,97 @@
   align-items: center;
   cursor: pointer;
   border: 1px dashed #bdb9b9;
+}
+.create-listing .create-listing2 .photos label .icon {
+  font-size: 60px;
+}
+.create-listing .create-listing2 .photos label p {
+  font-weight: 600;
+  text-align: center;
+}
+.create-listing .create-listing2 .photos .together {
+  width: 250px;
+  height: 150px;
+}
+.create-listing .create-listing2 .photos .alone {
+  padding: 40px 100px;
+}
+@media (max-width: 580px) {
+  .create-listing .create-listing2 .photos .alone {
+    padding: 40px 80px;
+  }
+}
+@media (max-width: 480px) {
+  .create-listing .create-listing2 .photos .alone {
+    padding: 40px 30px;
+  }
+}
+.create-listing .create-listing2 .title input {
+  border: 1px solid #bdb9b9;
+  padding: 15px 30px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+}
+.create-listing .create-listing2 .title input:focus {
+  outline: none;
+}
+.create-listing .create-listing2 .description p {
+  font-weight: 700;
+  margin: 20px 0 10px;
+}
+.create-listing .create-listing2 .description input,
+.create-listing .create-listing2 .description textarea {
+  border: 1px solid #bdb9b9;
+  padding: 15px 30px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  width: 600px;
+}
+@media (max-width: 820px) {
+  .create-listing .create-listing2 .description input,
+  .create-listing .create-listing2 .description textarea {
+    width: 450px;
+  }
+}
+@media (max-width: 720px) {
+  .create-listing .create-listing2 .description input,
+  .create-listing .create-listing2 .description textarea {
+    width: 350px;
+  }
+}
+@media (max-width: 480px) {
+  .create-listing .create-listing2 .description input,
+  .create-listing .create-listing2 .description textarea {
+    width: 280px;
+  }
+}
+.create-listing .create-listing2 .description input:focus,
+.create-listing .create-listing2 .description textarea:focus {
+  outline: none;
+}
+.create-listing .create-listing2 .description span {
+  font-size: 25px;
+  font-weight: 700;
+  margin-right: 20px;
+}
+.create-listing .create-listing2 .description .price {
+  width: 200px;
+}
+.create-listing .submit_btn {
+  margin-top: 40px;
+  padding: 10px 15px;
+  background-color: #F8395A;
+  border: none;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+  color: white;
+  border-radius: 10px;
+}
+.create-listing .submit_btn:hover {
+  box-shadow: 0 0 10px 3px rgb(117, 117, 117);
 }/*# sourceMappingURL=CreateListening.css.map */

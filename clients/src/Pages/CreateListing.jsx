@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import "../Styles/CreateListening.scss";
 import Navbar from "../components/Navbar";
 import { categories, types, facilities } from '../data';
-import { RemoveCircleOutline, AddCircleOutline, AspectRatioOutlined } from '@mui/icons-material';
+import { RemoveCircleOutline, AddCircleOutline } from '@mui/icons-material';
 import variables from "../Styles/variables.scss";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { IoIosImages } from "react-icons/io";
 import { BiTrash } from 'react-icons/bi';
 
 const CreateListing = () => {
-  const [category ,setCategory] = useState("");
-  const [type,setType] = useState("");
-  const [amenities,setAmenities] = useState([]);
+  const [category, setCategory] = useState("");
+  const [type, setType] = useState("");
+  const [amenities, setAmenities] = useState([]);
 
   // upload ,drag and drop ,remove photos 
   const [photos, setPhotos] = useState([])
@@ -45,7 +45,7 @@ const CreateListing = () => {
             <h3>Which of these categories best describes your place</h3>
             <div className="category-list">
               {categories?.map((item, index) => (
-                <div className={`category ${category === item.label ? "selected" : " "}`} key={index} onClick={()=> setCategory(item.label)}>
+                <div className={`category ${category === item.label ? "selected" : " "}`} key={index} onClick={() => setCategory(item.label)}>
                   <div className="category_icon">{item.icon}</div>
                   <p>{item.label}</p>
                 </div>
@@ -165,15 +165,15 @@ const CreateListing = () => {
                     ref={provided.innerRef}>
                     {photos.length < 1 && (
                       <>
-                        <input type='file' 
-                        style={{ display: "none" }}
+                        <input type='file'
+                          style={{ display: "none" }}
                           id='image'
                           accept='image/'
                           onChange={handleUploadPhotos}
                           multiple
                         />
-                        <label htmlFor='image' 
-                        className='alone'>
+                        <label htmlFor='image'
+                          className='alone'>
                           <div className="icon" >
                             <IoIosImages />
                           </div>
@@ -186,9 +186,9 @@ const CreateListing = () => {
                       <>
                         {photos.map((photo, index) => {
                           return (
-                            <Draggable key={index} 
-                            draggableId={index.toString()}
-                             index={index}>
+                            <Draggable key={index}
+                              draggableId={index.toString()}
+                              index={index}>
                               {(provided) => (
                                 <div className="photo"
                                   ref={provided.innerRef}
@@ -196,7 +196,7 @@ const CreateListing = () => {
                                   {...provided.dragHandleProps}>
                                   <img src={URL.createObjectURL(photo)} alt="place" />
                                   <button
-                                   type='button'
+                                    type='button'
                                     onClick={() => handleRemovePhoto(index)}>
                                     <BiTrash />
                                   </button>
@@ -234,12 +234,14 @@ const CreateListing = () => {
               <input type="text " placeholder='Highlight' name='highlight' required />
               <p>Highlight details</p>
               <textarea type="text " placeholder='Highlight details' name='highlightDESC' required />
-              
               <p>Now, set your PRICE</p>
               <span>$</span>
               <input type="number" placeholder='100' name='price' className='price' required />
             </div>
           </div>
+          <button className='submit_btn' type='submit'>
+            Create Your Listing
+          </button>
         </form>
       </div>
     </div>

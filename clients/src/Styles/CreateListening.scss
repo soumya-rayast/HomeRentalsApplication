@@ -190,31 +190,35 @@
         }
     }
 
-    .create-listing2{
+    .create-listing2 {
         background-color: white;
         padding: 30px 40px;
         border-radius: 20px;
         margin-top: 40px;
 
-        @include sm{
+        @include sm {
             padding: 30px 20px;
         }
-        h2{
+
+        h2 {
             color: $pinkred;
         }
-        hr{
+
+        hr {
             margin: 15px 20px;
         }
-        h3{
+
+        h3 {
             margin: 40px 20px;
             color: $blue;
         }
-        .amenities{
+
+        .amenities {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
 
-            .facility{
+            .facility {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -226,63 +230,160 @@
                 cursor: pointer;
                 transition: 0.2s ease;
 
-                &_icon{
+                &_icon {
                     font-size: 30px;
                 }
-                p{
+
+                p {
                     font-weight: 600;
                 }
-                &:hover{
+
+                &:hover {
                     border: 2px solid $pinkred;
                     background-color: $lightgrey;
                 }
             }
-            .selected{
-                border:  2px solid $pinkred;
+
+            .selected {
+                border: 2px solid $pinkred;
                 background-color: $lightgrey;
             }
         }
 
-        .photos{
+        .photos {
             display: flex;
             flex-wrap: wrap;
             gap: 15px;
 
-            .photo{
+            .photo {
                 position: relative;
                 width: 250px;
                 height: 150px;
                 cursor: move;
 
-                img{
+                img {
                     width: 100%;
                     height: 100%;
                 }
-                button{
+
+                button {
                     position: absolute;
                     right: 0;
                     top: 0;
                     padding: 3px;
                     border: none;
-                    background-color: rgba(255,255,255,0.8);
+                    background-color: rgba(255, 255, 255, 0.8);
                     font-size: 20px;
                     cursor: pointer;
 
-                    &:hover{
+                    &:hover {
                         color: $pinkred;
                     }
                 }
             }
-            label{
+
+            label {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 cursor: pointer;
                 border: 1px dashed $grey ;
+
+                .icon {
+                    font-size: 60px;
+                }
+
+                p {
+                    font-weight: 600;
+                    text-align: center;
+                }
+            }
+
+            .together {
+                width: 250px;
+                height: 150px;
+            }
+
+            .alone {
+                padding: 40px 100px;
+
+                @include mm {
+                    padding: 40px 80px;
+                }
+
+                @include sm {
+                    padding: 40px 30px;
+                }
+            }
+        }
+
+        .title {
+            input {
+                border: 1px solid $grey;
+                padding: 15px 30px;
+                border-radius: 10px;
+                font-size: 16px;
+                font-weight: 600;
+                width: 100%;
+
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+
+        .description {
+            p {
+                font-weight: 700;
+                margin: 20px 0 10px;
+            }
+
+            input,
+            textarea {
+                border: 1px solid $grey;
+                padding: 15px 30px;
+                border-radius: 10px;
+                font-size: 16px;
+                font-weight: 600;
+                width: 600px;
+
+                @include ml {
+                    width: 450px;
+                }
+
+                @include md {
+                    width: 350px;
+                }
+
+                @include sm {
+                    width: 280px;
+                }
+
+                &:focus {
+                    outline: none;
+                }
+            }
+
+            span {
+                font-size: 25px;
+                font-weight: 700;
+                margin-right: 20px;
+            }
+
+            .price {
+                width: 200px;
             }
         }
     }
-}
 
-// 2:48:02
+    .submit_btn {
+        margin-top: 40px;
+
+        @include buttonStyle;
+
+        &:hover {
+            box-shadow: 0 0 10px 3px rgb(117, 117, 117);
+        }
+    }
+}
