@@ -2,16 +2,40 @@ import React, { useState } from 'react';
 import "../Styles/CreateListening.scss";
 import Navbar from "../components/Navbar";
 import { categories, types, facilities } from '../data';
-import { RemoveCircleOutline, AddCircleOutline } from '@mui/icons-material';
+import { RemoveCircleOutline, AddCircleOutline, Bed } from '@mui/icons-material';
 import variables from "../Styles/variables.scss";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { IoIosImages } from "react-icons/io";
 import { BiTrash } from 'react-icons/bi';
 
 const CreateListing = () => {
+
   const [category, setCategory] = useState("");
   const [type, setType] = useState("");
   const [amenities, setAmenities] = useState([]);
+
+  // location section 
+  const [formLocation, setFormLocation] = useState({
+    streetAddress: "",
+    aptSuite: "",
+    city: "",
+    province: "",
+    country: ""
+  })
+
+  const handleChangeLocation = (e) => {
+    const { name, value } = e.target
+    setFormLocation({
+      ...formLocation,
+      [name]: value
+    })
+  };
+
+  // basic count section 
+  const [GuestCount ,setGuestCount] = useState(1);
+  const [bedroomCount ,setbedroomCount] = useState(1);
+  const [bedCount ,setbedCount] = useState(1);
+  const [bathCount ,setbathCount] = useState(1);
 
   // upload ,drag and drop ,remove photos 
   const [photos, setPhotos] = useState([])
@@ -29,6 +53,7 @@ const CreateListing = () => {
 
     setPhotos(items)
   }
+
   const handleRemovePhoto = (indexToRemove) => {
     setPhotos((prevPhotos) => prevPhotos.filter((_, index) => index !== indexToRemove))
   }
@@ -55,7 +80,9 @@ const CreateListing = () => {
             <h3>What type of place will guests have?</h3>
             <div className="type-list">
               {types?.map((item, index) => (
-                <div className="type" key={index}>
+                <div className={`type ${type === item.name ? "selected" : ""}`}
+                  key={index}
+                  onClick={() => setType(item.name)}>
                   <div className="type_text">
                     <h4>{item.name}</h4>
                     <p>{item.description}</p>
@@ -65,74 +92,91 @@ const CreateListing = () => {
               ))}
             </div>
 
-            <h3>Where's your place located</h3>
+            <h3>Where's your place located?</h3>
             <div className="full">
               <div className="location">
                 <p>Street Address</p>
-                <input type="text" placeholder='Street Address' name='streetAddress' required />
+                <input type="text" placeholder='Street Address'onChange={handleChangeLocation} name='streetAddress' value={formLocation.streetAddress}required />
               </div>
             </div>
             <div className="half">
               <div className="location">
                 <p>Appartment,Suite,etc.(if applicable)</p>
-                <input type="text" placeholder='Apt, Suite,etc.(if applicable)' name='aptSuite' required />
+                <input type="text" placeholder='Apt, Suite,etc.(if applicable)'onChange={handleChangeLocation} value={formLocation.aptSuite}name='aptSuite' required />
               </div>
             </div>
             <div className="half">
               <div className="location">
                 <p>City</p>
-                <input type="text" placeholder='City' name='city' required />
+                <input type="text" placeholder='City' name='city'onChange={handleChangeLocation} value={formLocation.city} required />
               </div>
             </div>
             <div className="half">
               <div className="location">
                 <p>Province</p>
-                <input type="text" placeholder='Province' name='province' required />
+                <input type="text" placeholder='Province' name='province'onChange={handleChangeLocation} value={formLocation.province} required />
               </div>
             </div>
             <div className="half">
               <div className="location">
                 <p>Country</p>
-                <input type="text" placeholder='Country' name='country' required />
+                <input type="text" placeholder='Country' name='country'onChange={handleChangeLocation} value={formLocation.country} required />
               </div>
             </div>
 
 
             <h3>Share some basics about your place</h3>
             <div className="basics">
+
               <div className="basic">
                 <p>Guests</p>
                 <div className="basic_count">
-                  <RemoveCircleOutline style={{ fontSize: "25px", cursor: "pointer" }} />
-                  <p>1</p>
-                  <AddCircleOutline style={{ fontSize: "25px", cursor: "pointer" }} />
+                  <RemoveCircleOutline
+                  onClick = {()=>{GuestCount > 1 && setGuestCount(GuestCount -1 ) }}
+                   style={{ fontSize: "25px", cursor: "pointer" }} />
+                  <p>{GuestCount}</p>
+                  <AddCircleOutline
+                  onClick = {()=>{setGuestCount(GuestCount + 1 ) }}
+                   style={{ fontSize: "25px", cursor: "pointer" }} />
                 </div>
               </div>
 
               <div className="basic">
                 <p>bedrooms</p>
                 <div className="basic_count">
-                  <RemoveCircleOutline style={{ fontSize: "25px", cursor: "pointer" }} />
-                  <p>1</p>
-                  <AddCircleOutline style={{ fontSize: "25px", cursor: "pointer" }} />
+                  <RemoveCircleOutline 
+                  onClick = {()=>{bedroomCount > 1 && setbedroomCount(bedroomCount - 1 ) }}
+                   style={{ fontSize: "25px", cursor: "pointer" }} />
+                  <p>{bedroomCount}</p>
+                  <AddCircleOutline 
+                  onClick = {()=>{setbedroomCount(bedroomCount + 1 ) }}
+                  style={{ fontSize: "25px", cursor: "pointer" }} />
                 </div>
               </div>
 
               <div className="basic">
                 <p>Beds</p>
                 <div className="basic_count">
-                  <RemoveCircleOutline style={{ fontSize: "25px", cursor: "pointer" }} />
-                  <p>1</p>
-                  <AddCircleOutline style={{ fontSize: "25px", cursor: "pointer" }} />
+                  <RemoveCircleOutline 
+                  onClick = {()=>{bedCount > 1 && setbedCount(bedCount - 1 ) }}
+                   style={{ fontSize: "25px", cursor: "pointer" }} />
+                  <p>{bedCount}</p>
+                  <AddCircleOutline 
+                  onClick = {()=>{setbedCount(bedCount + 1 ) }}
+                  style={{ fontSize: "25px", cursor: "pointer" }} />
                 </div>
               </div>
 
               <div className="basic">
                 <p>Bathrooms</p>
                 <div className="basic_count">
-                  <RemoveCircleOutline style={{ fontSize: "25px", cursor: "pointer" }} />
-                  <p>1</p>
-                  <AddCircleOutline style={{ fontSize: "25px", cursor: "pointer" }} />
+                  <RemoveCircleOutline
+                  onClick = {()=>{bathCount > 1 && setbathCount(bathCount - 1 ) }}
+                   style={{ fontSize: "25px", cursor: "pointer" }} />
+                  <p>{bathCount}</p>
+                  <AddCircleOutline 
+                  onClick = {()=>{setbathCount(bathCount + 1 ) }}
+                  style={{ fontSize: "25px", cursor: "pointer" }} />
                 </div>
               </div>
 
