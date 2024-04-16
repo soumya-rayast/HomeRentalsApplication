@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const ListingSchema = new mongoose.Schema({
 
    creator: {
-        type : mongoose.Types.ObjectId,
+        type : mongoose.Schema.Types.ObjectId,
         ref:'User',
     },
     category: {
@@ -51,7 +51,7 @@ const ListingSchema = new mongoose.Schema({
     },
     amenities: {
         type: Array,
-        default: [{}]
+        default: []
     },
     listingPhotoPaths: [{ type: String }],//for storing phot url
     title: {
@@ -67,7 +67,7 @@ const ListingSchema = new mongoose.Schema({
         required: true
     },
     price: {
-        typeNumber,
+        type:Number,
         required: true,
     },
 }, { timestamps: true }

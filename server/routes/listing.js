@@ -36,10 +36,26 @@ router.post("/create", upload.array("listingPhotos"), async (req, res) => {
         await newListing.save()
         res.status(200).json(newListing)
     } catch (err) {
-        res.status(400).json({ message: "Fail to create Listing",error:err.message })
+        res.status(400).json({ message: "Fail to create Listing", error: err.message })
         console.log(err)
     }
 })
 
-// 3 : 27  : 00 min
 // get listings 
+router.get("/", async (req, res) => {
+    const qCategory = req.query.category
+    try {
+        let listings
+        if (qCategory) {
+            listings = await Listing.find({ category: qCategory }).populate.apply("creator");
+        } else {
+            listings = await Listing.find()
+        }
+        res.status(200).json(listings)
+    } catch (err) {
+        res.status(404).json({ message: "Fail to Fetch Listings", error: err.message })
+        console.log(err)
+    }
+})
+
+module.exports = router
