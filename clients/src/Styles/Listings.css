@@ -1,0 +1,54 @@
+:export {
+  pinkred: #F8395A;
+  blue: #24355A;
+  lightgrey: #F7F8F8;
+  grey: #bdb9b9;
+  darkgrey: #969393;
+}
+
+.category-list {
+  padding: 50px 80px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 60px;
+}
+@media (max-width: 480px) {
+  .category-list {
+    padding: 50px 20px;
+  }
+}
+.category-list .category {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-items: center;
+  color: #969393;
+  cursor: pointer;
+}
+.category-list .category_icon {
+  font-size: 30px;
+}
+.category-list .category p {
+  font-size: 18px;
+  font-weight: 700;
+}
+.category-list .category:hover {
+  color: #F8395A;
+}
+.category-list .selected {
+  color: #F8395A;
+}
+
+.listings {
+  padding: 0 60px 120px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+}
+@media (max-width: 1000px) {
+  .listings {
+    padding: 0 20px 120px;
+  }
+}/*# sourceMappingURL=Listings.css.map */

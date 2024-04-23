@@ -6,10 +6,10 @@ const User = require("../models/User")
 // for configuration multer
 
 const storage = multer.diskStorage({
-    destination: function (req, res, cd) {
-        cb(null, "public/uploads");
+    destination: function (req,file, cb) {
+        cb(null, "public/uploads/");
     },
-    filename: function (req, res, cb) {
+    filename: function (req,file, cb) {
         cb(null, file.originalname) //for using original file name 
     },
 });
@@ -21,7 +21,8 @@ router.post("/create", upload.array("listingPhotos"), async (req, res) => {
     try {
         const { creator, category, type, streetAddress, aptSuite, city, province, country, GuestCount, bedroomCount, bedCount, bathroomCount, amenities, title, description, highlight, highlightDesc, price } = req.body
 
-        const listingPhotos = req.files
+        const listingPhotos = req.files;
+
         if (!listingPhotos) {
             return res.status(400).send("No file Uploaded.")
         }
@@ -29,7 +30,6 @@ router.post("/create", upload.array("listingPhotos"), async (req, res) => {
         const listingPhotoPaths = listingPhotos.map((file) => file.path)
         const newListing = new Listing({
             creator,
-            firstName: user.firstName,
             category,
             type, streetAddress, aptSuite, city, province, country, GuestCount, bedroomCount, bedCount, bathroomCount, amenities, listingPhotoPaths, title, description, highlight, highlightDesc, price
         })
@@ -49,13 +49,13 @@ router.get("/", async (req, res) => {
         if (qCategory) {
             listings = await Listing.find({ category: qCategory }).populate.apply("creator");
         } else {
-            listings = await Listing.find()
+            listings = await Listing.find().populate("creator")
         }
         res.status(200).json(listings)
     } catch (err) {
         res.status(404).json({ message: "Fail to Fetch Listings", error: err.message })
-        console.log(err)
+        console.log(err);
     }
 })
 
-module.exports = router
+module.exports = router;

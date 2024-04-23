@@ -84,7 +84,17 @@ const CreateListing = () => {
       [name]: value
     })
   }
-  const creatorId = useSelector((state) => state.user._id);
+  // const creatorId = useSelector((state) => state.user._id);
+  const creatorId = useSelector((state) => {
+    if (state.user && state.user._id) {
+      return state.user._id;
+    } else {
+      // Handle error condition
+      console.error("user or user._id is not defined in state");
+      return null; // or some default value
+    }
+  });
+  
   const navigate = useNavigate();
   const handlePost = async (e) => {
     e.preventDefault()
@@ -114,7 +124,7 @@ const CreateListing = () => {
         listingForm.append("listingPhotos", photo)
       })
       // sending POST request to server 
-      const response = await fetch("http://localhost:3001/properties/create", {
+      const response = await fetch("http://localhost:3000/properties/create", {
         method: "POST",
         body: listingForm
       })
