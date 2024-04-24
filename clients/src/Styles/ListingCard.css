@@ -1,0 +1,85 @@
+:export {
+  pinkred: #F8395A;
+  blue: #24355A;
+  lightgrey: #F7F8F8;
+  grey: #bdb9b9;
+  darkgrey: #969393;
+}
+
+.listing-card {
+  position: relative;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 10px;
+}
+.listing-card:hover {
+  box-shadow: 0 3px 10px 2px rgba(0, 0, 0, 0.2);
+}
+.listing-card .slider-container {
+  width: 300px;
+  overflow: hidden;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+.listing-card .slider-container .slider {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+.listing-card .slider-container .slider .slide {
+  position: relative;
+  flex: 0 0 100%;
+  width: 100%;
+  height: 270px;
+  display: flex;
+  align-items: center;
+}
+.listing-card .slider-container .slider .slide img {
+  width: 100%;
+  height: 100%;
+  filter: brightness(85%);
+}
+.listing-card .slider-container .slider .slide .prev-button,
+.listing-card .slider-container .slider .slide .next-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 6px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.7);
+  z-index: 9999;
+}
+.listing-card .slider-container .slider .slide .prev-button:hover,
+.listing-card .slider-container .slider .slide .next-button:hover {
+  background-color: white;
+}
+.listing-card .slider-container .slider .slide .prev-button {
+  left: 10px;
+}
+.listing-card .slider-container .slider .slide .next-button {
+  right: 10px;
+}
+.listing-card h3 {
+  font-size: 18px;
+}
+.listing-card p {
+  font-size: 16px;
+}
+.listing-card span {
+  font-weight: 700;
+  font-size: 18px;
+}
+.listing-card .favorite {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 999;
+  background: none;
+}/*# sourceMappingURL=ListingCard.css.map */

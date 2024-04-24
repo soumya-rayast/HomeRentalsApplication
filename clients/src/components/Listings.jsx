@@ -15,35 +15,68 @@ const Listings = () => {
   const getFeedListings = async () => {
     try {
       const response = await fetch(
-        selectedCategory !== "All" 
-        ? `http://localhost3000/properties?category=${selectedCategory}`
-        :"http://localhost3000/properties",
+        selectedCategory !== "All"
+          ? `http://localhost3000/properties?category=${selectedCategory}`
+          : "http://localhost3000/properties",
         { method: "GET", });
-
-        const data = await response.json();
-        dispatch(setListings({listings:data}));
-        setLoading(false);
-
+      const data = await response.json();
+      dispatch(setListings({ listings: data }));
+      setLoading(false);
     } catch (err) {
-      console.log("Fetch Listings Failed",err.message)
+      console.log("Fetch Listings Failed", err.message);
     }
-  };console.log(listings)
+  }; console.log(listings)
 
-  useEffect(()=>{
+  useEffect(() => {
     getFeedListings();
-  },[selectedCategory]);
-
+  }, [selectedCategory]);
+  console.log(listings)
   return (
-    <div className='category-list'>
-      {categories?.map((category, index) => (
-        <div className='category' key={index} onClick={() => setSelectedCategory(category.label)}>
-          <div className="category_icon">
-            {category.icon}
+    <>
+      <div className='category-list'>
+        {categories?.map((category, index) => (
+          <div className='category' key={index}
+            onClick={() => setSelectedCategory(category.label)}>
+            <div className="category_icon">
+              {category.icon}
+            </div>
+            <p>{category.label}</p>
           </div>
-          <p>{category.label}</p>
+        ))}
+      </div>
+      {loading ? (<Loader />) : (
+        <div className="listings">
+          {listings.map((
+            {
+              _id,
+              creator,
+              listingPhotoPaths,
+              city,
+              province,
+              country,
+              category,
+              type,
+              price,
+              booking = false
+            }
+          ) =>
+          (<ListingCard
+            listingId={_id}
+            creator={creator}
+            listingPhotoPaths={listingPhotoPaths}
+            city={city}
+            province={province}
+            country={country}
+            category={category}
+            type={type}
+            price={price}
+            booking={booking}
+          />
+          ))
+          }
         </div>
-      ))}
-    </div>
+      )}
+    </>
   )
 }
 

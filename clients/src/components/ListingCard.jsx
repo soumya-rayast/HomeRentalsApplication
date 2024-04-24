@@ -1,10 +1,28 @@
 import React from 'react'
-
-const ListingCard = () => {
+import "../Styles/ListingCard.scss"
+const ListingCard = ({ listingId,
+  creator,
+  listingPhotoPaths,
+  city,
+  province,
+  country,
+  category,
+  type,
+  price }) => {
   return (
-    <div>
-      
-    </div>
+    <>
+      <div className='listing-card'>
+        <div className="slider-container">
+          <div className='slider'>
+            {listingPhotoPaths?.map((photo,index)=>(
+              <div>
+                
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </>
   )
 }
 
