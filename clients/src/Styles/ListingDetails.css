@@ -1,0 +1,140 @@
+:export {
+  pinkred: #F8395A;
+  blue: #24355A;
+  lightgrey: #F7F8F8;
+  grey: #bdb9b9;
+  darkgrey: #969393;
+}
+
+.listing-details {
+  padding: 40px 130px 120px;
+}
+@media (max-width: 1120px) {
+  .listing-details {
+    padding: 40px 80px 120px;
+  }
+}
+@media (max-width: 1000px) {
+  .listing-details {
+    padding: 40px 50px 120px;
+  }
+}
+@media (max-width: 480px) {
+  .listing-details {
+    padding: 40px 20px 120px;
+  }
+}
+.listing-details .title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+@media (max-width: 480px) {
+  .listing-details .title {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+}
+@media (max-width: 480px) {
+  .listing-details .title h1 {
+    font-size: 26px;
+  }
+}
+.listing-details .title .save {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+.listing-details .title .save p {
+  font-style: 20px;
+  font-weight: 700;
+  margin: 0;
+}
+.listing-details .photos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0;
+}
+.listing-details .photos img {
+  max-width: 280px;
+}
+.listing-details hr {
+  margin: 20px 0;
+}
+.listing-details .profile {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.listing-details .profile img {
+  width: 60px;
+  height: 60px;
+  margin: 0;
+}
+.listing-details p {
+  max-width: 800px;
+  margin-top: 20px;
+}
+.listing-details .booking {
+  display: flex;
+  justify-content: space-between;
+}
+@media (max-width: 1000px) {
+  .listing-details .booking {
+    flex-direction: column;
+    gap: 50px;
+  }
+}
+.listing-details .booking .amenities {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 100px;
+  margin: 30px 0;
+  min-width: 700px;
+}
+@media (max-width: 480px) {
+  .listing-details .booking .amenities {
+    grid-column-gap: 20px;
+  }
+}
+.listing-details .booking .amenities .facility {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.listing-details .booking .amenities .facility_icon {
+  font-size: 30px;
+}
+.listing-details .booking .amenities .facility p {
+  margin: 0;
+}
+.listing-details .booking .data-range-calender {
+  margin: 30px 0;
+}
+.listing-details .booking .data-range-calender h2 {
+  margin-bottom: 10px;
+}
+.listing-details .booking .data-range-calender .button {
+  padding: 10px 15px;
+  background-color: #F8395A;
+  border: none;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+  color: white;
+  border-radius: 10px;
+  width: 100%;
+  margin-top: 30px;
+}
+@media (max-width: 1000px) {
+  .listing-details .booking .data-range-calender .button {
+    max-width: 300px;
+  }
+}/*# sourceMappingURL=ListingDetails.css.map */

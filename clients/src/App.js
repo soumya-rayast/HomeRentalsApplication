@@ -30,6 +30,7 @@ import HomePage from './Pages/HomePage';
 import RegisterPage from './Pages/RegisterPage';
 import LoginPage from './Pages/LoginPage';
 import CreateListing from './Pages/CreateListing';
+import ListingDetails from './Pages/ListingDetails';
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
             <Route path='/register' element={<RegisterPage />} />
             <Route path='/login' element={<LoginPage />} />
             <Route path='/create-listing' element={<CreateListing />} />
+            <Route path='/create-listing/:listingId' element={<ListingDetails/>} />
           </Routes>
         </Router>
       </div>
