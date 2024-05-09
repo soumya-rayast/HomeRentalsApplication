@@ -35,7 +35,7 @@ const Listings = () => {
     <>
       <div className='category-list'>
         {categories?.map((category, index) => (
-          <div className='category' key={index}
+          <div className={`category ${category.label === selectedCategory ? 'selected' : ""}`} key={index}
             onClick={() => setSelectedCategory(category.label)}>
             <div className="category_icon">
               {category.icon}
