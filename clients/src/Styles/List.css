@@ -1,0 +1,30 @@
+:export {
+  pinkred: #F8395A;
+  blue: #24355A;
+  lightgrey: #F7F8F8;
+  grey: #bdb9b9;
+  darkgrey: #969393;
+}
+
+.title-list {
+  margin: 40px 100px;
+  color: #24355A;
+}
+@media (max-width: 480px) {
+  .title-list {
+    margin: 40px 50px;
+  }
+}
+
+.list {
+  padding: 0 100px 120px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+@media (max-width: 1120px) {
+  .list {
+    padding: 0 20px 120px;
+  }
+}/*# sourceMappingURL=List.css.map */

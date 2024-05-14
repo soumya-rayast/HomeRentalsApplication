@@ -65,9 +65,11 @@ const ListingDetails = () => {
         },
         body: JSON.stringify(bookingForm),
       })
-      if (response.ok) { }
+      if (response.ok) {
+        navigate(`/${customerId}/trips`)
+       }
     } catch (err) {
-
+    console.log("Submit booking failed",err.message)
     }
   }
   // 5:23
@@ -130,7 +132,7 @@ const ListingDetails = () => {
               <h2>Total Price: ${listing.price * dayCount}</h2>
               <p>Start Date : {dateRange[0].startDate.toDateString()}</p>
               <p>End Date : {dateRange[0].endDate.toDateString()}</p>
-              <button className='button' type='submit'>
+              <button className='button' type='submit' onClick={handleSubmit}>
                 BOOKING
               </button>
             </div>

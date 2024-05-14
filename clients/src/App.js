@@ -31,6 +31,7 @@ import RegisterPage from './Pages/RegisterPage';
 import LoginPage from './Pages/LoginPage';
 import CreateListing from './Pages/CreateListing';
 import ListingDetails from './Pages/ListingDetails';
+import TripList from './Pages/TripList';
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
             <Route path='/login' element={<LoginPage />} />
             <Route path='/create-listing' element={<CreateListing />} />
             <Route path='/create-listing/:listingId' element={<ListingDetails/>} />
+            <Route path='/:userId/trips' element={<TripList/>}/>
           </Routes>
         </Router>
       </div>

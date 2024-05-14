@@ -15,7 +15,11 @@ const ListingCard = ({ listingId,
   country,
   category,
   type,
-  price }) => {
+  price,
+  startDate,
+  endDate,
+  totalPrice,
+  booking }) => {
 
   // slider for images 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -35,7 +39,7 @@ const ListingCard = ({ listingId,
       <div className='listing-card'>
         <div className="slider-container">
           <div className='slider'
-            style={{ transform:`translateX(-${currentIndex * 100}%)`}}>
+            style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
             {listingPhotoPaths?.map((photo, index) => (
               <div key={index} className='slide'>
                 <img src={`http://localhost:3001${photo.replace("public", "")}`}
@@ -62,8 +66,15 @@ const ListingCard = ({ listingId,
         </div>
         <h3>{city},{province},{country}</h3>
         <p>{category}</p>
-        <p>{type}</p>
-        <p><span>${price}per night</span></p>
+        {!booking ? (<>
+          <p>{type}</p>
+          <p><span>${price}</span> per night</p>
+        </>) : (
+        <>
+          <p>{startDate} - {endDate}</p>
+          <p><span>${totalPrice}</span>total</p>
+        </>
+        ) }
       </div>
     </>
   )
