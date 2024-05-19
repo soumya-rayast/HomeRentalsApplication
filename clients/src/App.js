@@ -32,6 +32,7 @@ import LoginPage from './Pages/LoginPage';
 import CreateListing from './Pages/CreateListing';
 import ListingDetails from './Pages/ListingDetails';
 import TripList from './Pages/TripList';
+import WishList from './Pages/WishList';
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
             <Route path='/create-listing' element={<CreateListing />} />
             <Route path='/create-listing/:listingId' element={<ListingDetails/>} />
             <Route path='/:userId/trips' element={<TripList/>}/>
+            <Route path="/:userId/WishList" element={<WishList/>}/>
           </Routes>
         </Router>
       </div>

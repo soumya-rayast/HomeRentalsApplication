@@ -18,7 +18,7 @@ router.patch("/:userId/:listingId", async (req, res) => {
     try {
         const { userId, listingId } = req.params;
         const user = await User.findById(userId);
-        const listing = await Listing.findById(listingId);
+        const listing = await Listing.findById(listingId).populate("creator");
         const favoriteListing = user.wishList.find((item) => item._id.toString() === listingId);
         if(favoriteListing){
             user.wishList = user.wishList.filter((item)=>item._id.toString() !== listingId);

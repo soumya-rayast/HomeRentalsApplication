@@ -38,10 +38,11 @@ const ListingCard = ({ listingId,
   const dispatch = useDispatch();
   // Add to wishlist 
   const user = useSelector((state) => state.user);
-  const wishList = useSelector((state) => state.user.wishList);
-  const isLiked = wishList.find((item) => item._id === listingId);
+  const wishList = user?.wishList || [];
+  const isLiked = wishList.find((item) => item?._id === listingId);
 
   const patchWishlist = async () => {
+    if(user?._id !== creator._id){
     const response = await fetch(`http://localhost:3001/users/${user._id}/${listingId}`, {
       method: "PATCH",
       header: {
@@ -50,7 +51,10 @@ const ListingCard = ({ listingId,
     })
     const data = await response.json();
     dispatch(setWishList(data.wishList));
+  }else{
+    return;
   }
+}
   return (
     <>
       <div className='listing-card'>
@@ -92,15 +96,18 @@ const ListingCard = ({ listingId,
             <p><span>${totalPrice}</span>total</p>
           </>
         )}
-        <div className='favorite' onClick={()=>patchWishlist()}>
-          {isLiked ? 
-          ( <Favorite style={{color:"red"}}/>):(
-            <Favorite style={{color:"white"}}/>
-          ) }
-        </div>
+        <button className='favorite'
+          onClick={(e) => {
+            e.stopPropagation();
+            patchWishlist()
+          }} disabled={!user}>
+          {isLiked ?
+            (<Favorite style={{ color: "red" }} />) : (
+              <Favorite style={{ color: "white" }} />
+            )}
+        </button>
       </div>
     </>
-  )
+  );
 };
-
 export default ListingCard;
