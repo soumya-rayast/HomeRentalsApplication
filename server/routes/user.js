@@ -33,4 +33,26 @@ router.patch("/:userId/:listingId", async (req, res) => {
         res.status(404).json({message: err.message});
     }
 })
-module.exports = router;
+// Get property List 
+router.get("/:userId/properties",async (req,res)=>{
+    try{
+        const {userId} = req.params;
+        const properties = await Listing.find({creator: userId}).populate("creator");
+        res.status(202).json(properties);
+    }catch{
+        console.log(err);
+        res.status(404).json({message:"Can not find properties",error:err.message})
+    }
+})
+// Get reservation List 
+router.get("/:userId/reservations",async (req,res)=>{
+    try {
+        const {userId} = req.params;
+        const reservations = await Booking.find({hostid:userId}).populate("CustomerId hostId , listingId");
+        res.status(202).json(reservations);
+    } catch (err) {
+        console.log(err);
+        res.status(404).json({message:"Can Not reservations!",error:err.message})
+    }
+})
+module.exports = router

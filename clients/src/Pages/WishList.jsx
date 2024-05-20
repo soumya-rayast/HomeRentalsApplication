@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSelector } from "react"
+import { useSelector } from "react-redux"
 import "../Styles/List.scss"
 import Navbar from "../components/Navbar"
 import ListingCard from '../components/ListingCard'
