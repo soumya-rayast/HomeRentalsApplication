@@ -1,41 +1,40 @@
-import React, { useEffect, useState } from 'react'
-import "../Styles/List.css"
-import Loader from "../components/Loader"
-import Navbar from '../components/Navbar'
-import { useParams } from 'react-router-dom'
-import { useSelector ,useDispatch } from 'react-redux'
-import { setListings } from '../Redux/State'
+import React, { useEffect ,useState} from 'react'
+import { useParams} from 'react-router-dom'
+import "../Styles/List.scss"
+import Navbar from "../components/Navbar"
+import { useSelector,useDispatch } from 'react-redux'
 import ListingCard from '../components/ListingCard'
+import { setListings } from '../Redux/State';
+import Loader from '../components/Loader'
 import Footer from "../components/Footer"
-const CategoryPage = () => {
+const SearchPage = () => {
     const [loading, setLoading] = useState(true);
-    const {category} = useParams();
+    const  {search} = useParams();
     const listings = useSelector((state)=>state.listings);
     const dispatch = useDispatch();
-    const getFeedListings = async ()=>{
+
+    const getSearchListings = async () =>{
         try {
-            const response = await fetch(`http://localhost:3001/properties?category=${category}`,
-                {
-                    method: "GET",
-                }
-            );
-            const data = response.json();
-            dispatchEvent(setListings({listings:data}));
+            const reponse = await fetch(`http://localhost:3001/properties/search/${search}`,{
+                method: "GET",
+            });
+            const data = await Response.json();
+            dispatch(setListings({listings:data}));
             setLoading(false);
+
         } catch (err) {
-            console.log("Fetch Listings Failed", err.message)
+            console.log("Fetch Search List failed",err.message);
         }
     }
     useEffect(()=>{
-        getFeedListings();
-    },[category]); 
-    
-    return loading ? <Loader /> : (
-        <>
+        getSearchListings();
+    },[search])
+    return loading ? <Loader/>: (
+        <div>
             <Navbar />
-            <h1 className='title-list'>{category} listings</h1>
+            <h1 className='title-list'>Your Wish List</h1>
             <div className="list">
-                {listings.map((
+                {listings?.map((
                     _id,
                     creator,
                     listingPhotoPaths,
@@ -48,7 +47,7 @@ const CategoryPage = () => {
                     booking = false
                 ) => (<ListingCard
                     listingId={_id}
-                    creator={creator}
+                    creator={creator} 
                     listingPhotoPaths={listingPhotoPaths}
                     city={city}
                     province={province}
@@ -60,8 +59,8 @@ const CategoryPage = () => {
                 />))}
             </div>
             <Footer/>
-        </>
+        </div>
     )
 }
 
-export default CategoryPage
+export default SearchPage

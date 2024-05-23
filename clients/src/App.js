@@ -13,6 +13,7 @@ import WishList from './Pages/WishList';
 import PropertyList from './Pages/PropertyList';
 import ReservationList from './Pages/ReservationList';
 import CategoryPage from './Pages/CategoryPage';
+import SearchPage from './Pages/SearchPage';
 
 function App() {
   return (
@@ -24,12 +25,13 @@ function App() {
             <Route path='/register' element={<RegisterPage />} />
             <Route path='/login' element={<LoginPage />} />
             <Route path='/create-listing' element={<CreateListing />} />
-            <Route path='/create-listing/:listingId' element={<ListingDetails/>} />
-            <Route path='/create-listing/category/:category' element={<CategoryPage/>} />
+            <Route path='/properties/:listingId' element={<ListingDetails/>} />
+            <Route path='/properties/category/:category' element={<CategoryPage/>} />
             <Route path='/:userId/trips' element={<TripList/>}/>
             <Route path="/:userId/WishList" element={<WishList/>}/>
             <Route path='/:userId/properties' element={<PropertyList/>}/>
             <Route path='/:userId/reservations' element={<ReservationList/>}/>
+            <Route path='/properties/search/:search'element={<SearchPage/>}/>
           </Routes>
         </Router>
       </div>

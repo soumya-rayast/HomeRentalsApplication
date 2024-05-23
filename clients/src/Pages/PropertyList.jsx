@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import ListingCard from '../components/ListingCard';
 import { setPropertyList } from '../Redux/State';
 import Loader from "../components/Loader"
+import Footer from "../components/Footer"
 const PropertyList = () => {
   const [loading,setLoading] = useState(true)
   const user = useSelector((state => state.user));
@@ -55,6 +56,7 @@ const PropertyList = () => {
           booking={booking}
         />))}
       </div>
+      <Footer/>
     </div>
   )
 }

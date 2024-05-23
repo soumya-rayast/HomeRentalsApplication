@@ -3,6 +3,7 @@ import { useSelector } from "react-redux"
 import "../Styles/List.scss"
 import Navbar from "../components/Navbar"
 import ListingCard from '../components/ListingCard'
+import Footer from "../components/Footer"
 const WishList = () => {
     const wishList = useSelector((state) => state.wishList)
     return (
@@ -34,6 +35,7 @@ const WishList = () => {
                     booking={booking}
                 />))}
             </div>
+            <Footer/>
         </div>
     )
 }

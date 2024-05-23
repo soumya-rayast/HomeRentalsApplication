@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 import { useDispatch, useSelector } from 'react-redux';
 import { setReservationList } from '../Redux/State';
 import ListingCard from '../components/ListingCard';
-
+import Footer from "../components/Footer"
 const ReservationList = () => {
     const [loading, setLoading] = useState(true);
     const reservationList = useSelector((state) => state.user.reservationList);
@@ -48,6 +48,7 @@ const ReservationList = () => {
                         booking={booking}
                     />))}
             </div>
+            <Footer/>
         </>
     )
 }

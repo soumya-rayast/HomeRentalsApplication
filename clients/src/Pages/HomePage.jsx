@@ -5,7 +5,7 @@ import { store } from '../Redux/Store'
 import Slide from "../components/Slide"
 import Categories from '../components/Categories'
 import Listings from "../components/Listings"
-
+import Footer from "../components/Footer"
 const HomePage = () => {
   return (
     <Provider store={store}> 
@@ -13,7 +13,9 @@ const HomePage = () => {
       <Slide/>
       <Categories/>
       <Listings/>
+      <Footer/>
     </Provider>
+
   )
 }
 

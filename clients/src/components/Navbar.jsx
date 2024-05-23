@@ -17,7 +17,7 @@ const Navbar = () => {
 
   const [search, setSearch] = useState("")
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <div className="navbar">

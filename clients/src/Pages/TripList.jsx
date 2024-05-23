@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar"
 import { useDispatch, useSelector } from 'react-redux'
 import { setTripList } from '../Redux/State'
 import ListingCard from '../components/ListingCard'
+import Footer from "../components/Footer"
 const TripList = () => {
     const [loading, setLoading] = useState(true);
     const tripList = useSelector((state) => state.user.triplist);
@@ -47,6 +48,7 @@ const TripList = () => {
                         booking={booking}
                     />))}
             </div>
+            <Footer/>
         </>
     )
 }
