@@ -8,7 +8,7 @@ const UserScheme = new mongoose.Schema({
         type: String,
         required: true,
     },
-    Email: {
+    email: {
         type: String,
         required: true,
         unique: true,
@@ -21,10 +21,10 @@ const UserScheme = new mongoose.Schema({
         type: String,
         default: "",
     },
-    tripList: {
-        type: Array,
-        default: [],
-    },
+    tripList: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Trip'
+    }],    
     wishList: {
         type: Array,
         default: [],

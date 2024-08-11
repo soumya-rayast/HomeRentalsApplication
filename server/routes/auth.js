@@ -1,42 +1,41 @@
-const router = require("express").Router()
-const bcrypt = require("bcryptjs")
-const jwt = require("jsonwebtoken")
-const multer = require("multer")
+const router = require("express").Router();
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const multer = require("multer");
 
-const User = require("../models/User")
+const User = require("../models/User");
 
-// configuration Multer for uploading file
+// Multer configuration for uploading files
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, "public/uploads/")//store the uploaded files in uploads folder
+        cb(null, "public/uploads/");
     },
     filename: function (req, file, cb) {
-        cb(null, file.originalname) //use the original file name
+        cb(null, file.originalname);
     }
-})
+});
 
-const upload = multer({ storage })
+const upload = multer({ storage });
+
 // User Register
-
 router.post("/register", upload.single('profileImage'), async (req, res) => {
     try {
-        const { firstName, lastName, email, password } = req.body
-
+        const { firstName, lastName, email, password } = req.body;
         const profileImage = req.file;
+
         if (!profileImage) {
-            return res.status(400).send("No file uploaded")
+            return res.status(400).send("No file uploaded");
         }
-        const profileImagePath = profileImage.path  //path to the uploaded profile photo
+        const profileImagePath = profileImage.path;
 
-        const existingUser = await user.findOne({ email }) //check if user exists
+        const existingUser = await User.findOne({ email });
         if (existingUser) {
-            return res.status(409).json({ message: "User already exists" })
+            return res.status(409).json({ message: "User already exists" });
         }
 
-        const salt = await bcrypt.genSalt()  //for hass the password
-        const hashedPassword = await bcrypt.hash(password, salt)
+        const salt = await bcrypt.genSalt();
+        const hashedPassword = await bcrypt.hash(password, salt);
 
-        // creating new user 
         const newUser = new User({
             firstName,
             lastName,
@@ -44,36 +43,38 @@ router.post("/register", upload.single('profileImage'), async (req, res) => {
             password: hashedPassword,
             profileImagePath,
         });
-        await newUser.save()
+        await newUser.save();
 
-        // send a success full message 
-        res.status(200).json({ message: "User registered successfully", user: newUser })
+        res.status(200).json({ message: "User registered successfully", user: newUser });
     } catch (err) {
-        console.log(err)
-        res.status(500).json({ message: "registration Failed!", error: err.message })
+        console.log(err);
+        res.status(500).json({ message: "Registration failed!", error: err.message });
     }
-})
+});
 
-// login page
-
+// Login
 router.post("/login", async (req, res) => {
     try {
-        const [email, password] = req.body //take the information from login page
+        const { email, password } = req.body;
 
-        // checking existing user or not 
-        const user = await user.findOne({ email });
+        const user = await User.findOne({ email });
         if (!user) {
-            return res.status(409).json({ message: "User Dose not Exists" })
+            return res.status(409).json({ message: "User does not exist" });
         }
 
-        // generate jwt token 
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(400).json({ message: "Invalid credentials" });
+        }
+
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
         delete user.password;
 
-        res.status(200).json({ token, user })
+        res.status(200).json({ token, user });
     } catch (err) {
         console.log(err);
-        res.status(500).json({ error: err.message })
+        res.status(500).json({ error: err.message });
     }
-})
+});
+
 module.exports = router;

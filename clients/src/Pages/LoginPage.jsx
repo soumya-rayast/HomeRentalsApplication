@@ -40,8 +40,6 @@ const LoginPage = () => {
       console.log("Login failed",err.message)
     }
   }
-
-
   return (
     <div className='login'>
       <div className="login_content">

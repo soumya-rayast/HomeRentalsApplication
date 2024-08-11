@@ -1,67 +1,58 @@
-import React, { useEffect, useState } from 'react'
-import "../Styles/List.css"
-import Loader from "../components/Loader"
-import Navbar from '../components/Navbar'
-import { useParams } from 'react-router-dom'
-import { useSelector ,useDispatch } from 'react-redux'
-import { setListings } from '../Redux/State'
-import ListingCard from '../components/ListingCard'
-import Footer from "../components/Footer"
+import React, { useEffect, useState } from 'react';
+import "../Styles/List.css";
+import Loader from "../components/Loader";
+import Navbar from '../components/Navbar';
+import { useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { setListings } from '../Redux/State';
+import ListingCard from '../components/ListingCard';
+import Footer from "../components/Footer";
+
 const CategoryPage = () => {
     const [loading, setLoading] = useState(true);
-    const {category} = useParams();
-    const listings = useSelector((state)=>state.listings);
+    const { category } = useParams();
+    const listings = useSelector((state) => state.listings);
     const dispatch = useDispatch();
-    const getFeedListings = async ()=>{
+
+    const getFeedListings = async () => {
         try {
-            const response = await fetch(`http://localhost:3001/properties?category=${category}`,
-                {
-                    method: "GET",
-                }
-            );
-            const data = response.json();
-            dispatchEvent(setListings({listings:data}));
+            const response = await fetch(`http://localhost:3001/properties?category=${category}`);
+            const data = await response.json();
+            dispatch(setListings({ listings: data }));
             setLoading(false);
         } catch (err) {
-            console.log("Fetch Listings Failed", err.message)
+            console.log("Fetch Listings Failed", err.message);
         }
-    }
-    useEffect(()=>{
+    };
+
+    useEffect(() => {
         getFeedListings();
-    },[category]); 
-    
+    }, [category]);
+
     return loading ? <Loader /> : (
         <>
             <Navbar />
             <h1 className='title-list'>{category} listings</h1>
             <div className="list">
-                {listings.map((
-                    _id,
-                    creator,
-                    listingPhotoPaths,
-                    city,
-                    province,
-                    country,
-                    category,
-                    type,
-                    price,
-                    booking = false
-                ) => (<ListingCard
-                    listingId={_id}
-                    creator={creator}
-                    listingPhotoPaths={listingPhotoPaths}
-                    city={city}
-                    province={province}
-                    country={country}
-                    category={category}
-                    type={type}
-                    price={price}
-                    booking={booking}
-                />))}
+                {listings.map((listing) => (
+                    <ListingCard
+                        key={listing._id}
+                        listingId={listing._id}
+                        creator={listing.creator}
+                        listingPhotoPaths={listing.listingPhotoPaths}
+                        city={listing.city}
+                        province={listing.province}
+                        country={listing.country}
+                        category={listing.category}
+                        type={listing.type}
+                        price={listing.price}
+                        booking={listing.booking}
+                    />
+                ))}
             </div>
-            <Footer/>
+            <Footer />
         </>
-    )
-}
+    );
+};
 
-export default CategoryPage
+export default CategoryPage;
